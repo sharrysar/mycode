@@ -3,7 +3,7 @@
 hostname = input("What value should we set for hostname?")
 
 if hostname.lower() == "mtg":
-    print("The hostname was found to be mtg")
+    print(f"The hostname was found to be {hostname}")
     print("hostname matches the expected config")
    
 # printing out to user   

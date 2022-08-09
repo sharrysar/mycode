@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Driving a simple game framework with
    a dictionary object | Alta3 Research"""
+import crayons
 
 def showInstructions():
     """Show the game instructions when called"""
@@ -110,7 +111,7 @@ while True:
             #add the item to their inventory
             inventory.append(move[1])
             #display a helpful message
-            print('You picked up ' + move[1])
+            print('You picked up ' + crayons.magenta(move[1]))
             #delete the item key:value pair from the room's dictionary
             del rooms[currentRoom]['item']
         # if there's no item in the room or the item doesn't match
@@ -121,12 +122,22 @@ while True:
         ## If a player enters a room with a monster
     if 'item' in rooms[currentRoom] and 'monster' in rooms[currentRoom]['item']:
         showStatus()
-        print('A monster has got you... GAME OVER!')
+        print(crayons.red('A monster has got you... GAME OVER!'))
         break
 
         ## Define how a player can win
     if currentRoom == 'Garden' and 'key' in inventory and 'potion' in inventory:
-        print('You escaped the house with the ultra rare key and magic potion... YOU WIN!')
+        print(crayons.blue('You escaped the house with the ultra rare key and magic potion... YOU WIN!'))
+        print(''' 
+        ╔═══╗─────────────╔╗───╔╗───╔╗
+        ║╔═╗║────────────╔╝╚╗──║║──╔╝╚╗
+        ║║─╚╬══╦═╗╔══╦═╦═╩╗╔╬╗╔╣║╔═╩╗╔╬╦══╦═╗╔══╗
+        ║║─╔╣╔╗║╔╗╣╔╗║╔╣╔╗║║║║║║║║╔╗║║╠╣╔╗║╔╗╣══╣
+        ║╚═╝║╚╝║║║║╚╝║║║╔╗║╚╣╚╝║╚╣╔╗║╚╣║╚╝║║║╠══║
+        ╚═══╩══╩╝╚╩═╗╠╝╚╝╚╩═╩══╩═╩╝╚╩═╩╩══╩╝╚╩══╝
+        ──────────╔═╝║
+        ──────────╚══╝
+        ''')
         break
 
 

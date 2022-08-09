@@ -18,6 +18,15 @@ def showStatus():
     # print the player's current location
     print('---------------------------')
     print('You are in the ' + currentRoom)
+    # room descriptions
+    if currentRoom == "Garden":
+        print("Garden details")
+    if currentRoom == "Kitchen":
+        print("Kitchen details")
+    if currentRoom == "Dining Room":
+        print("Dining room details")
+    if currentRoom == "Hall":
+        print("Hall details")
     # print what the player is carrying
     print('Inventory:', inventory)
     # check if there's an item in the room, if so print it
@@ -30,18 +39,19 @@ def showStatus():
 inventory = []
 
 # a dictionary linking a room to other rooms
-## A dictionary linking a room to other rooms
-## A dictionary linking a room to other rooms
 rooms = {
 
             'Hall' : {
                   'south' : 'Kitchen',
                   'east'  : 'Dining Room',
+                  'west'  : 'Garden',
                   'item'  : 'key'
                 },
 
             'Kitchen' : {
-                  'north' : 'Hall',
+                  'south' : 'Hall',
+                  'east'  : 'Garden',
+                  'west'  : 'Dining Room',
                   'item'  : 'monster',
                 },
             'Dining Room' : {
@@ -50,9 +60,12 @@ rooms = {
                   'item' : 'potion'
                },
             'Garden' : {
-                  'north' : 'Dining Room'
-            }
-         }
+                  'north' : 'Dining Room',
+                  'item' : 'shovel, rake',
+                  'south' : 'Trap'
+                }
+        }
+
 
 # start the player in the Hall
 currentRoom = 'Hall'
@@ -80,6 +93,10 @@ while True:
         if move[1] in rooms[currentRoom]:
             #set the current room to the new room
             currentRoom = rooms[currentRoom][move[1]]
+            # added trap room the garden 
+            if currentRoom == "Trap":
+                print("You have fallen into a trap. There is no escape. Game over!")
+                break
         # if they aren't allowed to go that way:
         else:
             print('You can\'t go that way!')
@@ -93,20 +110,24 @@ while True:
             #add the item to their inventory
             inventory.append(move[1])
             #display a helpful message
-            print(move[1] + ' got!')
+            print('You picked up ' + move[1])
             #delete the item key:value pair from the room's dictionary
             del rooms[currentRoom]['item']
         # if there's no item in the room or the item doesn't match
         else:
             #tell them they can't get it
             print('Can\'t get ' + move[1] + '!')
+
         ## If a player enters a room with a monster
     if 'item' in rooms[currentRoom] and 'monster' in rooms[currentRoom]['item']:
+        showStatus()
         print('A monster has got you... GAME OVER!')
         break
-    ## Define how a player can win
+
+        ## Define how a player can win
     if currentRoom == 'Garden' and 'key' in inventory and 'potion' in inventory:
         print('You escaped the house with the ultra rare key and magic potion... YOU WIN!')
         break
+
 
 

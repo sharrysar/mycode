@@ -3,7 +3,7 @@ import os
 from cryptography.fernet import Fernet
 
 files = []
-path = "/home/student/mycode/testfiles"
+path = "/home/student/mycode/finalproject"
 
 # generating a key to be able to unlock files
 key = Fernet.generate_key()

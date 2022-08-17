@@ -1,0 +1,19 @@
+- name: making dirs
+  hosts: bender
+  connection: ssh
+  gather_facts: no
+
+  vars: 
+    nineties:
+      - Teenage
+      - Mutant
+      - Ninja
+      - Turtles
+      
+  tasks:
+
+  - name: Making directories from a list
+    file:
+      path: "{{ item | lower }}"
+      state: directory
+    loop: "{{ nineties }}"

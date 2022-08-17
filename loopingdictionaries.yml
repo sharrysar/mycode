@@ -1,0 +1,15 @@
+- name: looping dictionaries
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+  - name: Loop across complex data structures
+    debug:
+      msg: "A {{ item.name}} is my favorite {{ item.groups }}!"
+    loop:
+      - { name: 'banana', groups: 'fruit' }
+      - { name: 'rousing game of Monopoly', groups: 'pastime' }
+      - { name: 'cookie', groups: 'snack' }
+      - { name: 'carrot', groups: 'vegetable' }
